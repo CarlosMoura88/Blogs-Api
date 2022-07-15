@@ -23,7 +23,7 @@ module.exports = {
         type: Sequelize.STRING
       },
     });
-      },
+  },
 
   down: async (queryInterface) => {
     await queryInterface.dropTable('Users');
