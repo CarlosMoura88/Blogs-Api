@@ -22,17 +22,19 @@ module.exports = {
           key: 'id'
         },
       },
-      published: {        
+      published: {   
+        allowNull: false,     
         type: Sequelize.DATE,
 
       },
-      updated: {        
+      updated: {
+        allowNull: false,
         type: Sequelize.DATE,
       },
     });       
   },
 
-  down: async (queryInterface, Sequelize) => {   
+  down: async (queryInterface) => {   
     await queryInterface.dropTable('BlogPosts');
   },
 };
