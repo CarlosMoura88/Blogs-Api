@@ -1,7 +1,7 @@
 const { validateUserBody, generateToken } = require('../services/authService');
 const userService = require('../services/userService');
 const authService = require('../services/authService');
-const { throwAlreadyExistsError, throwUnauthorizedError } = require('../services/utils');
+const { throwAlreadyExistsError, throwUnauthorizedError, throwNotExistError } = require('../services/utils');
 
 const userController = {
   create: async (req, res) => {
@@ -21,6 +21,16 @@ const userController = {
     if (!token) return throwUnauthorizedError('Token not found');
     await authService.readToken(token);
     const user = await userService.getAll();
+    res.status(200).json(user);
+  },
+  getById: async (req, res) => {
+    const token = req.headers.authorization;
+    const { id } = req.params;
+    if (!token) return throwUnauthorizedError('Token not found');
+    await authService.readToken(token);
+    const user = await userService.getById(id);
+    if (!user) return throwNotExistError('User does not exist');
+
     res.status(200).json(user);
   },
 };

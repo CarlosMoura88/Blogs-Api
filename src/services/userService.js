@@ -23,6 +23,11 @@ const userService = {
     });
     return user;
   },
+  getById: async (id) => {
+    const user = await model.User
+    .findOne({ where: { id }, attributes: { exclude: ['password'] } });    
+    return user;
+  },
 };
 
 module.exports = userService;
