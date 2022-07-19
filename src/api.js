@@ -1,4 +1,6 @@
 const express = require('express');
+require('express-async-errors');
+const errorHandlerMiddleware = require('./middlewares/errorHandlerMiddleware');
 const loginRoute = require('./routes/loginRoute');
 
 // ...
@@ -9,6 +11,7 @@ app.use(express.json());
 
 app.use('/login', loginRoute);
 
+app.use(errorHandlerMiddleware);
 // ...
 
 // É importante exportar a constante `app`,
