@@ -6,6 +6,10 @@ const categoryService = {
     const category = model.Category.findOne({ where: { name } });
     return category;
   },
+  getAll: async () => {
+    const categories = model.Category.findAll();
+    return categories;
+  },
 };
 
 module.exports = categoryService;

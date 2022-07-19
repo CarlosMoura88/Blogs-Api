@@ -8,5 +8,6 @@ const router = express.Router();
 // categoryController.create
 
 router.post('/', categoryController.create);
+router.get('/', categoryController.getAll);
 
 module.exports = router;
