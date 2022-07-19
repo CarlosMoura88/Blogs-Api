@@ -30,6 +30,14 @@ const authService = {
     return result;
   },
 
+  validateCategoryBody: async (body) => {
+    const schema = Joi.object({
+      name: Joi.string().required().max(255),
+    });
+    const result = schema.validateAsync(body);
+    return result;
+  },
+
   generateToken: async (email) => {
     const token = jwt.sign({ data: email }, secret);
     return token;
