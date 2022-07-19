@@ -14,6 +14,15 @@ const userService = {
     } });
     return created;
   },
+
+  getAll: async () => {
+    const user = await model.User.findAll({ 
+      attributes: { 
+        exclude: ['password'], 
+      }, 
+    });
+    return user;
+  },
 };
 
 module.exports = userService;

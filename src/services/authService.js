@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const jwt = require('jsonwebtoken');
 const Joi = require('joi');
+const { throwUnauthorizedError } = require('./utils');
 
 const secret = process.env.JWT_SECRET;
 
@@ -29,14 +30,18 @@ const authService = {
     return result;
   },
 
-  generateToken: (email) => {
+  generateToken: async (email) => {
     const token = jwt.sign({ data: email }, secret);
     return token;
   },
 
-  readToken: (token) => {
-    const { data } = jwt.decode(token, secret);
-    return data;
+  readToken: async (token) => {
+    try {
+      const { data } = jwt.verify(token, secret);
+      return data;
+    } catch (err) {
+      throwUnauthorizedError('Expired or invalid token');
+    }
   },
 };
 
