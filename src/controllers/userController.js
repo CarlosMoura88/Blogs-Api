@@ -1,7 +1,11 @@
 const { validateUserBody, generateToken } = require('../services/authService');
 const userService = require('../services/userService');
 const authService = require('../services/authService');
-const { throwAlreadyExistsError, throwUnauthorizedError, throwNotExistError } = require('../services/utils');
+const { 
+  throwAlreadyExistsError, 
+  throwUnauthorizedError, 
+  throwNotExistError, 
+} = require('../services/utils');
 
 const userController = {
   create: async (req, res) => {
